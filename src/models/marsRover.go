@@ -27,5 +27,4 @@ func HandleBadInput(direction byte) error {
 	}
 
 	return errors.New("Direction invalid")
-
 }
