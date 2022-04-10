@@ -26,10 +26,14 @@ func TestMarsRoverMove(t *testing.T) {
 	Move(rover, instructions)
 
 	if rover.X != 1 {
-		t.Error("Rover X position should be 1")
+		t.Error("Rover X coordinate should be 1")
 	}
 
 	if rover.Y != 3 {
-		t.Error("Rover Y position should be 1")
+		t.Error("Rover Y coordinate should be 1")
+	}
+
+	if rover.Direction != 'N' {
+		t.Error("Rover should be facing direction N")
 	}
 }
