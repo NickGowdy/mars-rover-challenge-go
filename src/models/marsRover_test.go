@@ -3,7 +3,7 @@ package models
 import "testing"
 
 func TestNewMarsRover(t *testing.T) {
-	rover, _ := NewRover(1, 2, 'N')
+	rover, _ := NewRover(1, 2, "N", "L")
 
 	if rover == nil {
 		t.Error("Mars Rover can't be nil")
@@ -11,29 +11,17 @@ func TestNewMarsRover(t *testing.T) {
 }
 
 func TestNewMarsRoverDirection(t *testing.T) {
-	_, err := NewRover(1, 2, 'Z')
+	_, err := NewRover(1, 2, "Z", "LMLMLMLMM")
 
 	if err == nil {
 		t.Error("Mars Rover directions can only be N, S, E, W")
 	}
 }
 
-func TestMarsRoverMove(t *testing.T) {
-	rover, _ := NewRover(1, 2, 'N')
+func TestNewMarsRoverInstructions(t *testing.T) {
+	_, err := NewRover(1, 2, "Z", "123445")
 
-	instructions := "LMLMLMLMM"
-
-	Move(rover, instructions)
-
-	if rover.X != 1 {
-		t.Error("Rover X coordinate should be 1")
-	}
-
-	if rover.Y != 3 {
-		t.Error("Rover Y coordinate should be 1")
-	}
-
-	if rover.Direction != 'N' {
-		t.Error("Rover should be facing direction N")
+	if err == nil {
+		t.Error("Mars Rover directions can only contain L, R, M")
 	}
 }
