@@ -7,15 +7,15 @@ import (
 func Move(marsRovers []*models.MarsRover, xBoundary int, yBoundary int) {
 
 	for _, marsRover := range marsRovers {
-		for _, c := range marsRover.Instructions {
+		for _, c := range marsRover.GetInstructions() {
 			parsedInstruction := string(c)
 
 			if parsedInstruction == "L" || parsedInstruction == "R" {
-				turn(marsRover, string(c))
+				marsRover.Turn(string(c))
 			} else if parsedInstruction == "M" &&
 				noPossibleCollision(marsRover, marsRovers, parsedInstruction) &&
 				isInsideBoundary(marsRover, parsedInstruction, xBoundary, yBoundary) {
-				forward(marsRover, parsedInstruction)
+				marsRover.Forward(parsedInstruction)
 			}
 		}
 	}
@@ -23,64 +23,21 @@ func Move(marsRovers []*models.MarsRover, xBoundary int, yBoundary int) {
 
 func isInsideBoundary(marsRover *models.MarsRover, instruction string, xboundary int, yBoundary int) bool {
 	marsRoverCopy := marsRover
-	forward(marsRoverCopy, instruction)
+	marsRoverCopy.Forward(instruction)
 
-	return !(marsRoverCopy.X > xboundary || marsRoverCopy.Y > yBoundary)
+	return !(marsRoverCopy.GetX() > xboundary || marsRoverCopy.GetY() > yBoundary)
 }
 
 func noPossibleCollision(marsRover *models.MarsRover, marsRovers []*models.MarsRover, instruction string) bool {
 	marsRoverCopy := marsRover
 
-	forward(marsRoverCopy, instruction)
+	marsRoverCopy.Forward(instruction)
 
 	for _, mr := range marsRovers {
-		if mr.X == marsRoverCopy.X && mr.Y == marsRover.Y {
+		if mr.GetX() == marsRoverCopy.GetX() && mr.GetY() == marsRover.GetY() {
 			return false
 		}
 	}
 
 	return true
-}
-
-func turn(marsRover *models.MarsRover, instruction string) {
-	switch marsRover.Direction {
-	case "N":
-		if instruction == "L" {
-			marsRover.Direction = "W"
-		} else {
-			marsRover.Direction = "E"
-		}
-	case "S":
-		if instruction == "L" {
-			marsRover.Direction = "E"
-		} else {
-			marsRover.Direction = "W"
-		}
-	case "E":
-		if instruction == "L" {
-			marsRover.Direction = "N"
-		} else {
-			marsRover.Direction = "S"
-		}
-	case "W":
-		if instruction == "L" {
-			marsRover.Direction = "S"
-		} else {
-			marsRover.Direction = "N"
-		}
-	}
-
-}
-
-func forward(marsRover *models.MarsRover, instruction string) {
-	switch marsRover.Direction {
-	case "N":
-		marsRover.Y++
-	case "S":
-		marsRover.Y--
-	case "E":
-		marsRover.X++
-	case "W":
-		marsRover.X--
-	}
 }

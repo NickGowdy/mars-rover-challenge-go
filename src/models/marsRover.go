@@ -5,10 +5,24 @@ import (
 )
 
 type MarsRover struct {
-	X            int
-	Y            int
-	Direction    string
-	Instructions string
+	x, y                    int
+	direction, instructions string
+}
+
+func (marsRover *MarsRover) GetX() int {
+	return marsRover.x
+}
+
+func (marsRover *MarsRover) GetY() int {
+	return marsRover.y
+}
+
+func (marsRover *MarsRover) GetInstructions() string {
+	return marsRover.instructions
+}
+
+func (marsRover *MarsRover) GetDirection() string {
+	return marsRover.direction
 }
 
 func NewRover(x int, y int, direction string, instructions string) (*MarsRover, error) {
@@ -20,8 +34,52 @@ func NewRover(x int, y int, direction string, instructions string) (*MarsRover, 
 		return nil, errors.New("bad input for instructions")
 	}
 
-	m := MarsRover{X: x, Y: y, Direction: direction, Instructions: instructions}
+	m := MarsRover{x: x, y: y, direction: direction, instructions: instructions}
 	return &m, nil
+}
+
+func (marsRover *MarsRover) Turn(instruction string) {
+	direction := marsRover.GetDirection()
+	switch direction {
+	case "N":
+		if instruction == "L" {
+			marsRover.direction = "W"
+		} else {
+			marsRover.direction = "E"
+		}
+	case "S":
+		if instruction == "L" {
+			marsRover.direction = "E"
+		} else {
+			marsRover.direction = "W"
+		}
+	case "E":
+		if instruction == "L" {
+			marsRover.direction = "N"
+		} else {
+			marsRover.direction = "S"
+		}
+	case "W":
+		if instruction == "L" {
+			marsRover.direction = "S"
+		} else {
+			marsRover.direction = "N"
+		}
+	}
+
+}
+
+func (marsRover *MarsRover) Forward(instruction string) {
+	switch marsRover.direction {
+	case "N":
+		marsRover.y++
+	case "S":
+		marsRover.y--
+	case "E":
+		marsRover.x++
+	case "W":
+		marsRover.x--
+	}
 }
 
 func handleBadDirection(direction string) bool {

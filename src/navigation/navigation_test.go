@@ -1,6 +1,7 @@
 package navigation
 
 import (
+	"fmt"
 	"mars_rover/src/models"
 	"testing"
 )
@@ -12,27 +13,30 @@ func TestNavigation(t *testing.T) {
 
 	Move([]*models.MarsRover{rover1, rover2}, 5, 5)
 
-	if rover1.X != 1 {
+	fmt.Println(rover1.GetX())
+	fmt.Println(rover1.GetY())
+
+	if rover1.GetX() != 1 {
 		t.Error("Rover X coordinate should be 1")
 	}
 
-	if rover1.Y != 3 {
+	if rover1.GetY() != 3 {
 		t.Error("Rover Y coordinate should be 1")
 	}
 
-	if rover1.Direction != "N" {
+	if rover1.GetDirection() != "N" {
 		t.Error("Rover should be facing direction N")
 	}
 
-	if rover2.X != 5 {
+	if rover2.GetX() != 5 {
 		t.Error("Rover X coordinate should be 1")
 	}
 
-	if rover2.Y != 1 {
+	if rover2.GetY() != 1 {
 		t.Error("Rover Y coordinate should be 1")
 	}
 
-	if rover2.Direction != "E" {
+	if rover2.GetDirection() != "E" {
 		t.Error("Rover should be facing direction N")
 	}
 }
