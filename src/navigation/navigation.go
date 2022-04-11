@@ -4,7 +4,7 @@ import (
 	"mars_rover/src/models"
 )
 
-func Move(marsRovers []*models.MarsRover) {
+func Move(marsRovers []*models.MarsRover, xBoundary int, yBoundary int) {
 
 	for _, marsRover := range marsRovers {
 		for _, c := range marsRover.Instructions {
@@ -12,11 +12,20 @@ func Move(marsRovers []*models.MarsRover) {
 
 			if parsedInstruction == "L" || parsedInstruction == "R" {
 				turn(marsRover, string(c))
-			} else if parsedInstruction == "M" && noPossibleCollision(marsRover, marsRovers, parsedInstruction) {
-				forward(marsRover, string(c))
+			} else if parsedInstruction == "M" &&
+				noPossibleCollision(marsRover, marsRovers, parsedInstruction) &&
+				isInsideBoundary(marsRover, parsedInstruction, xBoundary, yBoundary) {
+				forward(marsRover, parsedInstruction)
 			}
 		}
 	}
+}
+
+func isInsideBoundary(marsRover *models.MarsRover, instruction string, xboundary int, yBoundary int) bool {
+	marsRoverCopy := marsRover
+	forward(marsRoverCopy, instruction)
+
+	return !(marsRoverCopy.X > xboundary || marsRoverCopy.Y > yBoundary)
 }
 
 func noPossibleCollision(marsRover *models.MarsRover, marsRovers []*models.MarsRover, instruction string) bool {
