@@ -8,18 +8,28 @@ func Move(marsRovers []*models.MarsRover) {
 
 	for _, marsRover := range marsRovers {
 		for _, c := range marsRover.Instructions {
+			parsedInstruction := string(c)
 
-			if string(c) == "L" || string(c) == "R" {
+			if parsedInstruction == "L" || parsedInstruction == "R" {
 				turn(marsRover, string(c))
-			} else if string(c) == "M" && noPossibleCollision(marsRover, marsRovers) {
+			} else if parsedInstruction == "M" && noPossibleCollision(marsRover, marsRovers, parsedInstruction) {
 				forward(marsRover, string(c))
 			}
 		}
 	}
 }
 
-func noPossibleCollision(marsRover *models.MarsRover, marsRovers []*models.MarsRover) bool {
-	// TODO: calculate if possible collision
+func noPossibleCollision(marsRover *models.MarsRover, marsRovers []*models.MarsRover, instruction string) bool {
+	marsRoverCopy := marsRover
+
+	forward(marsRoverCopy, instruction)
+
+	for _, mr := range marsRovers {
+		if mr.X == marsRoverCopy.X && mr.Y == marsRover.Y {
+			return false
+		}
+	}
+
 	return true
 }
 
