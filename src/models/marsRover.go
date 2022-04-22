@@ -17,7 +17,7 @@ func (marsRover *MarsRover) GetY() int {
 	return marsRover.y
 }
 
-func (marsRover *MarsRover) GetInstructions() string {
+func (marsRover *MarsRover) Instructions() string {
 	return marsRover.instructions
 }
 

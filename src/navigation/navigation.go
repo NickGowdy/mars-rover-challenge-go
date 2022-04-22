@@ -7,7 +7,7 @@ import (
 func Move(marsRovers []*models.MarsRover, xBoundary int, yBoundary int) {
 
 	for _, marsRover := range marsRovers {
-		for _, c := range marsRover.GetInstructions() {
+		for _, c := range marsRover.Instructions() {
 			parsedInstruction := string(c)
 
 			if parsedInstruction == "L" || parsedInstruction == "R" {
