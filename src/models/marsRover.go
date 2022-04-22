@@ -10,20 +10,20 @@ type MarsRover struct {
 	instructions string
 }
 
-func (marsRover *MarsRover) X() int {
-	return marsRover.x
+func (m *MarsRover) X() int {
+	return m.x
 }
 
-func (marsRover *MarsRover) Y() int {
-	return marsRover.y
+func (m *MarsRover) Y() int {
+	return m.y
 }
 
-func (marsRover *MarsRover) Instructions() string {
-	return marsRover.instructions
+func (m *MarsRover) Instructions() string {
+	return m.instructions
 }
 
-func (marsRover *MarsRover) Direction() string {
-	return marsRover.direction
+func (m *MarsRover) Direction() string {
+	return m.direction
 }
 
 func NewRover(x int, y int, direction string, instructions string) (*MarsRover, error) {
@@ -39,47 +39,47 @@ func NewRover(x int, y int, direction string, instructions string) (*MarsRover, 
 	return &m, nil
 }
 
-func (marsRover *MarsRover) Turn(instruction string) {
-	direction := marsRover.Direction()
+func (m *MarsRover) Turn(instruction string) {
+	direction := m.Direction()
 	switch direction {
 	case "N":
 		if instruction == "L" {
-			marsRover.direction = "W"
+			m.direction = "W"
 		} else {
-			marsRover.direction = "E"
+			m.direction = "E"
 		}
 	case "S":
 		if instruction == "L" {
-			marsRover.direction = "E"
+			m.direction = "E"
 		} else {
-			marsRover.direction = "W"
+			m.direction = "W"
 		}
 	case "E":
 		if instruction == "L" {
-			marsRover.direction = "N"
+			m.direction = "N"
 		} else {
-			marsRover.direction = "S"
+			m.direction = "S"
 		}
 	case "W":
 		if instruction == "L" {
-			marsRover.direction = "S"
+			m.direction = "S"
 		} else {
-			marsRover.direction = "N"
+			m.direction = "N"
 		}
 	}
 
 }
 
-func (marsRover *MarsRover) Forward(instruction string) {
-	switch marsRover.direction {
+func (m *MarsRover) Forward(instruction string) {
+	switch m.direction {
 	case "N":
-		marsRover.y++
+		m.y++
 	case "S":
-		marsRover.y--
+		m.y--
 	case "E":
-		marsRover.x++
+		m.x++
 	case "W":
-		marsRover.x--
+		m.x--
 	}
 }
 
