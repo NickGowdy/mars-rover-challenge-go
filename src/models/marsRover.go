@@ -2,6 +2,8 @@ package models
 
 import (
 	"errors"
+	"mars_rover/src/enums"
+	"mars_rover/src/validation"
 )
 
 type MarsRover struct {
@@ -28,10 +30,10 @@ func (m *MarsRover) Direction() string {
 
 func NewRover(x int, y int, direction string, instructions string) (*MarsRover, error) {
 
-	if !handleBadDirection(direction) {
+	if !validation.HandleBadDirection(direction) {
 		return nil, errors.New("bad input for starting direction")
 	}
-	if !handleBadInstructions(instructions) {
+	if !validation.HandleBadInstructions(instructions) {
 		return nil, errors.New("bad input for instructions")
 	}
 
@@ -42,29 +44,29 @@ func NewRover(x int, y int, direction string, instructions string) (*MarsRover, 
 func (m *MarsRover) Turn(instruction string) {
 	direction := m.Direction()
 	switch direction {
-	case "N":
-		if instruction == "L" {
-			m.direction = "W"
+	case enums.North:
+		if instruction == enums.Left {
+			m.direction = enums.West
 		} else {
-			m.direction = "E"
+			m.direction = enums.East
 		}
-	case "S":
-		if instruction == "L" {
-			m.direction = "E"
+	case enums.South:
+		if instruction == enums.Left {
+			m.direction = enums.East
 		} else {
-			m.direction = "W"
+			m.direction = enums.West
 		}
-	case "E":
-		if instruction == "L" {
-			m.direction = "N"
+	case enums.East:
+		if instruction == enums.Left {
+			m.direction = enums.North
 		} else {
-			m.direction = "S"
+			m.direction = enums.South
 		}
-	case "W":
-		if instruction == "L" {
-			m.direction = "S"
+	case enums.West:
+		if instruction == enums.Left {
+			m.direction = enums.South
 		} else {
-			m.direction = "N"
+			m.direction = enums.North
 		}
 	}
 
@@ -72,32 +74,13 @@ func (m *MarsRover) Turn(instruction string) {
 
 func (m *MarsRover) Forward(instruction string) {
 	switch m.direction {
-	case "N":
+	case enums.North:
 		m.y++
-	case "S":
+	case enums.South:
 		m.y--
-	case "E":
+	case enums.East:
 		m.x++
-	case "W":
+	case enums.West:
 		m.x--
 	}
-}
-
-func handleBadDirection(direction string) bool {
-	return direction == "N" || direction == "S" || direction == "E" || direction == "W"
-}
-
-func handleBadInstructions(instructions string) bool {
-	isValid := true
-
-	for _, c := range instructions {
-		if string(c) == "L" || string(c) == "R" || string(c) == "M" {
-			continue
-		} else {
-			isValid = false
-			break
-		}
-
-	}
-	return isValid
 }
