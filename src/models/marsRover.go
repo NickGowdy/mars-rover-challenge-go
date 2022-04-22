@@ -10,11 +10,11 @@ type MarsRover struct {
 	instructions string
 }
 
-func (marsRover *MarsRover) GetX() int {
+func (marsRover *MarsRover) X() int {
 	return marsRover.x
 }
 
-func (marsRover *MarsRover) GetY() int {
+func (marsRover *MarsRover) Y() int {
 	return marsRover.y
 }
 
@@ -22,7 +22,7 @@ func (marsRover *MarsRover) Instructions() string {
 	return marsRover.instructions
 }
 
-func (marsRover *MarsRover) GetDirection() string {
+func (marsRover *MarsRover) Direction() string {
 	return marsRover.direction
 }
 
@@ -40,7 +40,7 @@ func NewRover(x int, y int, direction string, instructions string) (*MarsRover, 
 }
 
 func (marsRover *MarsRover) Turn(instruction string) {
-	direction := marsRover.GetDirection()
+	direction := marsRover.Direction()
 	switch direction {
 	case "N":
 		if instruction == "L" {

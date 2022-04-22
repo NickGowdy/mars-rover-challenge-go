@@ -13,30 +13,30 @@ func TestNavigation(t *testing.T) {
 
 	Move([]*models.MarsRover{rover1, rover2}, 5, 5)
 
-	fmt.Println(rover1.GetX())
-	fmt.Println(rover1.GetY())
+	fmt.Println(rover1.X())
+	fmt.Println(rover1.Y())
 
-	if rover1.GetX() != 1 {
+	if rover1.X() != 1 {
 		t.Error("Rover X coordinate should be 1")
 	}
 
-	if rover1.GetY() != 3 {
+	if rover1.Y() != 3 {
 		t.Error("Rover Y coordinate should be 1")
 	}
 
-	if rover1.GetDirection() != "N" {
+	if rover1.Direction() != "N" {
 		t.Error("Rover should be facing direction N")
 	}
 
-	if rover2.GetX() != 5 {
+	if rover2.X() != 5 {
 		t.Error("Rover X coordinate should be 1")
 	}
 
-	if rover2.GetY() != 1 {
+	if rover2.Y() != 1 {
 		t.Error("Rover Y coordinate should be 1")
 	}
 
-	if rover2.GetDirection() != "E" {
+	if rover2.Direction() != "E" {
 		t.Error("Rover should be facing direction N")
 	}
 }

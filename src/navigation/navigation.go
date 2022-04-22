@@ -25,7 +25,7 @@ func isInsideBoundary(marsRover *models.MarsRover, instruction string, xboundary
 	marsRoverCopy := marsRover
 	marsRoverCopy.Forward(instruction)
 
-	return !(marsRoverCopy.GetX() > xboundary || marsRoverCopy.GetY() > yBoundary)
+	return !(marsRoverCopy.X() > xboundary || marsRoverCopy.Y() > yBoundary)
 }
 
 func noPossibleCollision(marsRover *models.MarsRover, marsRovers []*models.MarsRover, instruction string) bool {
@@ -34,7 +34,7 @@ func noPossibleCollision(marsRover *models.MarsRover, marsRovers []*models.MarsR
 	marsRoverCopy.Forward(instruction)
 
 	for _, mr := range marsRovers {
-		if mr.GetX() == marsRoverCopy.GetX() && mr.GetY() == marsRover.GetY() {
+		if mr.X() == marsRoverCopy.X() && mr.Y() == marsRover.Y() {
 			return false
 		}
 	}
