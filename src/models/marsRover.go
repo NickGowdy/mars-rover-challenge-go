@@ -5,8 +5,9 @@ import (
 )
 
 type MarsRover struct {
-	x, y                    int
-	direction, instructions string
+	x, y         int
+	direction    string
+	instructions string
 }
 
 func (marsRover *MarsRover) GetX() int {
