@@ -21,6 +21,18 @@ func TestHandleBadDirectionReturnsCorrectValue(t *testing.T) {
 	if HandleBadDirection(enums.West) != true {
 		t.Error(enums.West + " Should return true")
 	}
+
+	if HandleBadDirection(enums.Right) == true {
+		t.Error(enums.Right + " Should return false")
+	}
+
+	if HandleBadDirection(enums.Left) == true {
+		t.Error(enums.Left + " Should return false")
+	}
+
+	if HandleBadDirection(enums.Move) == true {
+		t.Error(enums.Move + " Should return false")
+	}
 }
 
 func TestHandleBadInstructionsReturnsCorrectValue(t *testing.T) {
