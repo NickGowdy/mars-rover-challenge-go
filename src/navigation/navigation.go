@@ -1,6 +1,7 @@
 package navigation
 
 import (
+	"mars_rover/src/enums"
 	"mars_rover/src/models"
 )
 
@@ -10,9 +11,9 @@ func Move(marsRovers []*models.MarsRover, xBoundary int, yBoundary int) {
 		for _, c := range marsRover.Instructions() {
 			parsedInstruction := string(c)
 
-			if parsedInstruction == "L" || parsedInstruction == "R" {
+			if parsedInstruction == enums.Left || parsedInstruction == enums.Right {
 				marsRover.Turn(string(c))
-			} else if parsedInstruction == "M" &&
+			} else if parsedInstruction == enums.Move &&
 				noPossibleCollision(marsRover, marsRovers, parsedInstruction) &&
 				isInsideBoundary(marsRover, parsedInstruction, xBoundary, yBoundary) {
 				marsRover.Forward(parsedInstruction)
